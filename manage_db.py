@@ -1,17 +1,15 @@
 import psycopg2
 import common
 
-
 try:
     conn = psycopg2.connect("dbname='maylandertamas' user='maylandertamas' password='zugzugloller'")
-
 except Exception as e:
     print("You cannot connect!")
     print(e)
-
 cur = conn.cursor()
 
 
+"""
 def get_col_titles(database_name):
     database_name_str = str(database_name)
     cur.execute("Select * FROM " + database_name_str)
@@ -23,7 +21,7 @@ MENTOR_DB_COL_TITLES = get_col_titles("mentors")
 APPLICANTS_DB_COL_TITLES = get_col_titles("applicants")
 print(MENTOR_DB_COL_TITLES)
 print(APPLICANTS_DB_COL_TITLES)
-
+"""
 
 def query_full_names():
     cur.execute("SELECT first_name, last_name FROM mentors;")
@@ -82,20 +80,18 @@ def delete_applicants():
 #common.print_table(query_for_other_girl(), ["Full Name", "Phone Number"])
 #common.print_table(query_for_carol(), ["Full Name", "Phone Number"])
 #common.print_table(query_full_names(), [MENTOR_DB_COL_TITLES[1], MENTOR_DB_COL_TITLES[2]])
-#common.print_table(query_nicknames(), [MENTOR_DB_COL_TITLES[3]])
 
 
-cur.execute("SELECT * FROM applicants")
-print(cur.fetchall())
-
-cur.close()
-conn.close()
-
-
-"""
 def main():
-    pass
+    while True:
+        common.print_menu()
+        try:
+            common.menu_options()
+        except KeyError as error:
+            print(error)
+
+    cur.close()
+    conn.close()
 
 if __name__ == '__main__':
     main()
-"""
