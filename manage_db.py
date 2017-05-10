@@ -55,17 +55,14 @@ def update_phone_num():
     jemimas_row = cur.fetchall()
     return jemimas_row
 
+
 def delete_applicants():
     cur.execute("DELETE FROM applicants\
                  WHERE email LIKE '%@mauriseu.net'")
     conn.commit()
-
-#delete_applicants()
-#common.print_table(update_phone_num(), ['ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application Code'])
-#common.print_table(insert_into_app_database(), ['ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application Code'])
-#common.print_table(query_for_other_girl(), ["Full Name", "Phone Number"])
-#common.print_table(query_for_carol(), ["Full Name", "Phone Number"])
-#common.print_table(query_full_names(), [MENTOR_DB_COL_TITLES[1], MENTOR_DB_COL_TITLES[2]])
+    cur.execute("SELECT * FROM applicants")
+    all_applicants = cur.fetchall()
+    return all_applicants
 
 
 def main():
