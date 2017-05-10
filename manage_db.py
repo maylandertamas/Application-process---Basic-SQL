@@ -9,6 +9,13 @@ except Exception as e:
 cur = conn.cursor()
 
 
+def show_all_db(database):
+    cur.execute("SELECT * FROM " + database +
+                " ORDER BY first_name ASC;")
+    applicants_database = cur.fetchall()
+    return applicants_database
+
+
 def query_full_names():
     cur.execute("SELECT first_name, last_name FROM mentors;")
     list_of_full_names = cur.fetchall()
@@ -71,7 +78,8 @@ def main():
                           ["Mentors' full name", "Mentors' nickname", "Who the hack is Carol?!",
                            "Who owns the hat if not Carol???", "Add Markus Schaffarzyk to applicants",
                            "Update Jemima's phone number",
-                           "Delete applicants with @mauriseu.net email adress", "Search in mentors database"])
+                           "Delete applicants with @mauriseu.net email adress", "Show all mentors",
+                           "Show all applicants", "Search in mentors database"])
         try:
             common.menu_options()
         except KeyError as error:

@@ -20,27 +20,27 @@ def print_table(table, title_list):
         print(separate_crosses)
 
 
-def input_verification(user_input, in_type):
+def input_verification(input_text, in_type):
     if in_type == "number":
-        if user_input == "":
-            raise TypeError("Insert something please!")
-        else:
+        input_checker = True
+        while input_checker:
             try:
-                user_input = int(user_input)
-            except ValueError as error:
+                user_input = int(input(input_text))
+            except ValueError:
                 print("Please insert a correct input!")
-                print(error)
-            return user_input
+            else:
+                input_checker = False
+        return user_input
     if in_type == "string":
-        if user_input == "":
-            raise TypeError("Insert something please!")
-        else:
+        input_checker = True
+        while input_checker:
             try:
-                user_input = str(user_input)
-            except ValueError as error:
+                user_input = str(input(input_text))
+            except ValueError:
                 print("Please insert a correct input!")
-                print(error)
-            return user_input
+            else:
+                input_checker = False
+        return user_input
 
 
 def menu_options():
@@ -63,6 +63,12 @@ def menu_options():
         print_table(manage_db.delete_applicants(), ['ID', 'First name', 'Last name',
                                                     'Phone number', 'Email', 'Application Code'])
     elif user_input == "8":
+        print_table(manage_db.show_all_db("mentors"), ['ID', 'First name', 'Last name',
+                                                       'Phone number', 'Email', 'Application Code'])
+    elif user_input == "9":
+        print_table(manage_db.show_all_db("applicants"), ['ID', 'First name', 'Last name',
+                                                          'Phone number', 'Email', 'Application Code'])
+    elif user_input == "10":
         search_in_db.mentor_search_menu()
     elif user_input == "0":
         manage_db.cur.close()

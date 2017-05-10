@@ -4,12 +4,9 @@ from manage_db import cur, main
 
 def get_col_titles(database_name):
     database_name_str = str(database_name)
-    cur.execute("Select * FROM " + database_name_str)
+    cur.execute("Select * FROM " + database_name_str + ";")
     colnames = [title[0] for title in cur.description]
     return colnames
-
-
-MENTOR_DB_COL_TITLES = get_col_titles("mentors")
 
 
 def mentor_search_menu():
@@ -41,19 +38,21 @@ def mentor_search_menu():
 
 def search_in_mentors_db(column):
     if column == "favourite_number":
-        user_input = input("Insert a number input to search by: ")
-        valid_user_input = common.input_verification(user_input, "number")
+        valid_user_input = common.input_verification("Insert a number input to search by: ", "number")
         cur.execute("SELECT * FROM mentors\
-                     WHERE " + column + " = " + str(valid_user_input) + ";")
+                     WHERE " + column + " = " + str(valid_user_input) + "\
+                     ORDER BY first_name ASC;")
     else:
-        user_input = input("Insert a text input to search by: ")
-        valid_user_input = common.input_verification(user_input, "string")
+        valid_user_input = common.input_verification("Insert text to search by: ", "string")
         cur.execute("SELECT * FROM mentors\
-                     WHERE lower(" + column + ") LIKE " + "\'%" + valid_user_input + "%\'")
+                     WHERE lower(" + column + ") LIKE " + "\'%" + valid_user_input + "%\' \
+                     ORDER BY first_name ASC;")
     search_result = cur.fetchall()
+
     # Get rid of None elements to be able to print table
     result_to_list = [list(element) for element in search_result]
     for element in result_to_list:
         if element[7] is None:
             element[7] = "Nothing"
+    MENTOR_DB_COL_TITLES = get_col_titles("mentors")
     common.print_table(result_to_list, MENTOR_DB_COL_TITLES)
