@@ -1,7 +1,5 @@
 import common
-import manage_db
-
-cur = manage_db.cur
+from manage_db import cur, main
 
 
 def get_col_titles(database_name):
@@ -36,7 +34,7 @@ def mentor_search_menu():
         elif user_input == "7":
             search_in_mentors_db("favourite_number")
         elif user_input == "0":
-            manage_db.main()
+            main()
         else:
             raise KeyError("There is no such an option!")
 
@@ -44,20 +42,18 @@ def mentor_search_menu():
 def search_in_mentors_db(column):
     if column == "favourite_number":
         user_input = input("Insert a number input to search by: ")
-        common.input_verification(user_input, "number")
+        valid_user_input = common.input_verification(user_input, "number")
         cur.execute("SELECT * FROM mentors\
-                     WHERE " + column + " = " + str(user_input) + ";")
-        search_result = cur.fetchall()
+                     WHERE " + column + " = " + str(valid_user_input) + ";")
     else:
         user_input = input("Insert a text input to search by: ")
-        common.input_verification(user_input, "string")
+        valid_user_input = common.input_verification(user_input, "string")
         cur.execute("SELECT * FROM mentors\
-                     WHERE lower(" + column + ") LIKE " + "\'%" + user_input + "%\'")
-        search_result = cur.fetchall()
-
-    # Get rid of None elements because of table print
+                     WHERE lower(" + column + ") LIKE " + "\'%" + valid_user_input + "%\'")
+    search_result = cur.fetchall()
+    # Get rid of None elements to be able to print table
     result_to_list = [list(element) for element in search_result]
     for element in result_to_list:
-        if element[7] == None:
+        if element[7] is None:
             element[7] = "Nothing"
     common.print_table(result_to_list, MENTOR_DB_COL_TITLES)
