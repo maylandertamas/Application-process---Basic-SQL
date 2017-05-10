@@ -1,6 +1,5 @@
 import manage_db
 import sys
-import os
 
 
 def print_table(table, title_list):
@@ -46,14 +45,16 @@ def menu_options():
         manage_db.update_phone_num()
     elif input_verified == 7:
         manage_db.delete_applicants()
-    elif user_input == 0:
+    elif input_verified == 0:
+        manage_db.cur.close()
+        manage_db.conn.close()
         sys.exit(0)
     else:
         raise KeyError("There is no such an option!")
 
 
-def print_menu():
-    print("Database Manager")
-    menu_points = ["Menup1", "Menup2", "Menup3", "Menup4", "Menup5", "Menup6", "Menup7", "Exit"]
+def print_menu(menu_name, menu_points):
+    print(menu_name)
     for index, option in enumerate(menu_points):
         print("[{0}] {1}".format(index+1, option))
+    print("[0] Exit")
