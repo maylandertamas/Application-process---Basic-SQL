@@ -9,20 +9,6 @@ except Exception as e:
 cur = conn.cursor()
 
 
-"""
-def get_col_titles(database_name):
-    database_name_str = str(database_name)
-    cur.execute("Select * FROM " + database_name_str)
-    colnames = [title[0] for title in cur.description]
-    return colnames
-
-
-MENTOR_DB_COL_TITLES = get_col_titles("mentors")
-APPLICANTS_DB_COL_TITLES = get_col_titles("applicants")
-print(MENTOR_DB_COL_TITLES)
-print(APPLICANTS_DB_COL_TITLES)
-"""
-
 def query_full_names():
     cur.execute("SELECT first_name, last_name FROM mentors;")
     list_of_full_names = cur.fetchall()
@@ -84,14 +70,16 @@ def delete_applicants():
 
 def main():
     while True:
-        common.print_menu()
+        common.print_menu("Database menu",
+                          ["Mentors' full name", "Mentors' nickname", "Who the hack is Carol?!",
+                           "Who owns the hat if not Carol???", "Add Markus Schaffarzyk to applicants",
+                           "Update Jemima's phone number",
+                           "Delete applicants with @mauriseu.net email adress"])
         try:
             common.menu_options()
         except KeyError as error:
             print(error)
 
-    cur.close()
-    conn.close()
 
 if __name__ == '__main__':
     main()
