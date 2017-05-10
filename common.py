@@ -46,19 +46,22 @@ def input_verification(user_input, in_type):
 def menu_options():
     user_input = input("Please choose a menu point! ")
     if user_input == "1":
-        print_table(manage_db.query_nicknames(), ["Nick names"])
+        print_table(manage_db.query_full_names(), ["First name", "Last name"])
     elif user_input == "2":
-        manage_db.query_nicknames()
+        print_table(manage_db.query_nicknames(), ["Nick names"])
     elif user_input == "3":
-        manage_db.query_for_carol()
+        print_table(manage_db.query_for_carol(), ["Full Name", "Phone Number"])
     elif user_input == "4":
-        manage_db.query_for_other_girl()
+        print_table(manage_db.query_for_other_girl(), ["Full Name", "Phone Number"])
     elif user_input == "5":
-        manage_db.insert_into_app_database()
+        print_table(manage_db.insert_into_app_database(), ['ID', 'First name', 'Last name',
+                                                           'Phone number', 'Email', 'Application Code'])
     elif user_input == "6":
-        manage_db.update_phone_num()
+        print_table(manage_db.update_phone_num(), ['ID', 'First name', 'Last name',
+                                                   'Phone number', 'Email', 'Application Code'])
     elif user_input == "7":
-        manage_db.delete_applicants()
+        print_table(manage_db.delete_applicants(), ['ID', 'First name', 'Last name',
+                                                    'Phone number', 'Email', 'Application Code'])
     elif user_input == "8":
         search_in_db.mentor_search_menu()
     elif user_input == "0":
