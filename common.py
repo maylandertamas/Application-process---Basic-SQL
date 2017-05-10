@@ -22,6 +22,7 @@ def print_table(table, title_list):
 
 def input_verification(input_text, in_type):
     if in_type == "number":
+
         input_checker = True
         while input_checker:
             try:
@@ -30,8 +31,11 @@ def input_verification(input_text, in_type):
                 print("Please insert a correct input!")
             else:
                 input_checker = False
+
         return user_input
+
     if in_type == "string":
+
         input_checker = True
         while input_checker:
             try:
@@ -40,40 +44,53 @@ def input_verification(input_text, in_type):
                 print("Please insert a correct input!")
             else:
                 input_checker = False
+
         return user_input
 
 
 def menu_options():
     user_input = input("Please choose a menu point! ")
+
     if user_input == "1":
         print_table(manage_db.query_full_names(), ["First name", "Last name"])
+
     elif user_input == "2":
         print_table(manage_db.query_nicknames(), ["Nick names"])
+
     elif user_input == "3":
         print_table(manage_db.query_for_carol(), ["Full Name", "Phone Number"])
+
     elif user_input == "4":
         print_table(manage_db.query_for_other_girl(), ["Full Name", "Phone Number"])
+
     elif user_input == "5":
         print_table(manage_db.insert_into_app_database(), ['ID', 'First name', 'Last name',
                                                            'Phone number', 'Email', 'Application Code'])
+
     elif user_input == "6":
         print_table(manage_db.update_phone_num(), ['ID', 'First name', 'Last name',
                                                    'Phone number', 'Email', 'Application Code'])
+
     elif user_input == "7":
         print_table(manage_db.delete_applicants(), ['ID', 'First name', 'Last name',
                                                     'Phone number', 'Email', 'Application Code'])
+
     elif user_input == "8":
         print_table(manage_db.show_all_db("mentors"), ['ID', 'First name', 'Last name',
                                                        'Phone number', 'Email', 'Application Code'])
+
     elif user_input == "9":
         print_table(manage_db.show_all_db("applicants"), ['ID', 'First name', 'Last name',
                                                           'Phone number', 'Email', 'Application Code'])
+
     elif user_input == "10":
         search_in_db.mentor_search_menu()
+
     elif user_input == "0":
         manage_db.cur.close()
         manage_db.conn.close()
         sys.exit(0)
+
     else:
         raise KeyError("There is no such an option!")
 

@@ -6,6 +6,7 @@ try:
 except Exception as e:
     print("You cannot connect!")
     print(e)
+
 cur = conn.cursor()
 
 
@@ -47,6 +48,7 @@ def insert_into_app_database():
                 (first_name, last_name, phone_number, email, application_code)\
                 VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);")
     conn.commit()
+
     cur.execute("SELECT * FROM applicants\
                  WHERE application_code=54823")
     new_applicants_row = cur.fetchall()
@@ -57,6 +59,7 @@ def update_phone_num():
     cur.execute("UPDATE applicants\
                  SET phone_number = '003670/223-7459'\
                  WHERE first_name='Jemima' AND last_name='Foreman'")
+
     cur.execute("SELECT * FROM applicants\
                  WHERE first_name='Jemima' AND last_name='Foreman'")
     jemimas_row = cur.fetchall()
@@ -67,6 +70,7 @@ def delete_applicants():
     cur.execute("DELETE FROM applicants\
                  WHERE email LIKE '%@mauriseu.net'")
     conn.commit()
+
     cur.execute("SELECT * FROM applicants")
     all_applicants = cur.fetchall()
     return all_applicants
