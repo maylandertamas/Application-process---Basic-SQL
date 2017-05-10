@@ -1,6 +1,6 @@
 import manage_db
 import sys
-
+import search_in_db
 
 def print_table(table, title_list):
     border_horizontal = '_'
@@ -19,17 +19,34 @@ def print_table(table, title_list):
         print(separate_crosses)
 
 
-def usr_input_verification(user_input):
-    try:
-        user_input = int(user_input)
-    except ValueError as error:
-        print("Please insert a correct input!")
-        print(error)
-    return user_input
+def input_verification(user_input, in_type):
+    if in_type == "number":
+        if user_input = "":
+            print("Insert a number please!")
+        else:
+            try:
+                user_input = int(user_input)
+            except ValueError as error:
+                print("Please insert a correct input!")
+                print(error)
+            return user_input
+    if in_type == "string":
+        if user_input = "":
+            print("Insert text please!")
+        else:
+            try:
+                user_input = str(user_input)
+            except ValueError as error:
+                print("Please insert a correct input!")
+                print(error)
+            return user_input
+
+        
+
 
 def menu_options():
     user_input = input("Please choose a menu point! ")
-    input_verified = usr_input_verification(user_input)
+    input_verified = input_verification(user_input, "number")
 
     if input_verified == 1:
         print_table(manage_db.query_nicknames(), ["Nick names"])
@@ -45,6 +62,8 @@ def menu_options():
         manage_db.update_phone_num()
     elif input_verified == 7:
         manage_db.delete_applicants()
+    elif input_verified == 8:
+        search_in_db.mentor_search_menu()
     elif input_verified == 0:
         manage_db.cur.close()
         manage_db.conn.close()
