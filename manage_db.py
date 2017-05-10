@@ -2,7 +2,7 @@ import psycopg2
 import common
 
 try:
-    conn = psycopg2.connect("dbname='maylandertamas' user='maylandertamas' password='zugzugloller'")
+    conn = psycopg2.connect("dbname='maylandertamas' user='maylandertamas'")
 except Exception as e:
     print("You cannot connect!")
     print(e)
