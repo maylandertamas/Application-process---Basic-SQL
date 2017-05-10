@@ -74,7 +74,7 @@ def main():
                           ["Mentors' full name", "Mentors' nickname", "Who the hack is Carol?!",
                            "Who owns the hat if not Carol???", "Add Markus Schaffarzyk to applicants",
                            "Update Jemima's phone number",
-                           "Delete applicants with @mauriseu.net email adress"])
+                           "Delete applicants with @mauriseu.net email adress", "Search in mentors database"])
         try:
             common.menu_options()
         except KeyError as error:
