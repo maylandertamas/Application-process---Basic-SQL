@@ -21,22 +21,21 @@ def mentor_search_menu():
                            "Search by phone number", "Search by email adress", "Search by city",
                            "Search by favourite number"])
         user_input = input("Please choose a menu point! ")
-        input_verified = common.input_verification(user_input, "number")
-        if input_verified == 1:
+        if user_input == "1":
             search_in_mentors_db("first_name")
-        elif input_verified == 2:
+        elif user_input == "2":
             search_in_mentors_db("last_name")
-        elif input_verified == 3:
+        elif user_input == "3":
             search_in_mentors_db("nick_name")
-        elif input_verified == 4:
+        elif user_input == "4":
             search_in_mentors_db("phone_number")
-        elif input_verified == 5:
+        elif user_input == "5":
             search_in_mentors_db("email")
-        elif input_verified == 6:
+        elif user_input == "6":
             search_in_mentors_db("city")
-        elif input_verified == 7:
+        elif user_input == "7":
             search_in_mentors_db("favourite_number")
-        elif input_verified == 0:
+        elif user_input == "0":
             manage_db.main()
         else:
             raise KeyError("There is no such an option!")
@@ -55,4 +54,10 @@ def search_in_mentors_db(column):
         cur.execute("SELECT * FROM mentors\
                      WHERE lower(" + column + ") LIKE " + "\'%" + user_input + "%\'")
         search_result = cur.fetchall()
-    common.print_table(search_result, MENTOR_DB_COL_TITLES)
+
+    # Get rid of None elements because of table print
+    result_to_list = [list(element) for element in search_result]
+    for element in result_to_list:
+        if element[7] == None:
+            element[7] = "Nothing"
+    common.print_table(result_to_list, MENTOR_DB_COL_TITLES)
