@@ -68,6 +68,7 @@ def insert_into_app_database():
         print("Identity already exists with this application code!")
     else:
         conn.commit()
+
     cur.execute("SELECT * FROM applicants\
                  WHERE application_code=54823")
     new_applicants_row = cur.fetchall()
