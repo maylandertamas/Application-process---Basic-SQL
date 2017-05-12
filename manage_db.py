@@ -1,5 +1,6 @@
 import psycopg2
 import common
+import os
 
 try:
     conn = psycopg2.connect("dbname='maylandertamas' user='maylandertamas'")
@@ -10,6 +11,14 @@ except Exception as e:
 cur = conn.cursor()
 
 
+def sys_clear(function):
+    def wrapper(*args, **kwargs):
+        os.system('clear')
+        return function(*args, **kwargs)
+    return wrapper
+
+
+@sys_clear
 def show_all_db(database):
     cur.execute("SELECT * FROM " + database +
                 " ORDER BY first_name ASC;")
@@ -17,18 +26,21 @@ def show_all_db(database):
     return applicants_database
 
 
+@sys_clear
 def query_full_names():
     cur.execute("SELECT first_name, last_name FROM mentors;")
     list_of_full_names = cur.fetchall()
     return list_of_full_names
 
 
+@sys_clear
 def query_nicknames():
     cur.execute("SELECT nick_name FROM mentors;")
     list_of_nicknames = cur.fetchall()
     return list_of_nicknames
 
 
+@sys_clear
 def query_for_carol():
     cur.execute("SELECT first_name || ' ' || last_name, phone_number  FROM applicants\
                  WHERE first_name='Carol';")
@@ -36,6 +48,7 @@ def query_for_carol():
     return carols_data
 
 
+@sys_clear
 def query_for_other_girl():
     cur.execute("SELECT first_name || ' ' || last_name, phone_number FROM applicants\
                  WHERE email LIKE '%@adipiscingenimmi.edu';")
@@ -43,18 +56,25 @@ def query_for_other_girl():
     return other_girls_data
 
 
+@sys_clear
 def insert_into_app_database():
-    cur.execute("INSERT INTO applicants\
-                (first_name, last_name, phone_number, email, application_code)\
-                VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);")
-    conn.commit()
-
+    try:
+        cur.execute("INSERT INTO applicants\
+                    (first_name, last_name, phone_number, email, application_code)\
+                    VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);")
+    except psycopg2.DatabaseError as error:
+        conn.rollback()
+        print(error)
+        print("Identity already exists with this application code!")
+    else:
+        conn.commit()
     cur.execute("SELECT * FROM applicants\
                  WHERE application_code=54823")
     new_applicants_row = cur.fetchall()
     return new_applicants_row
 
 
+@sys_clear
 def update_phone_num():
     cur.execute("UPDATE applicants\
                  SET phone_number = '003670/223-7459'\
@@ -66,6 +86,7 @@ def update_phone_num():
     return jemimas_row
 
 
+@sys_clear
 def delete_applicants():
     cur.execute("DELETE FROM applicants\
                  WHERE email LIKE '%@mauriseu.net'")
@@ -77,6 +98,7 @@ def delete_applicants():
 
 
 def main():
+
     while True:
         common.print_menu("Database menu",
                           ["Mentors' full name", "Mentors' nickname", "Who the hack is Carol?!",
@@ -86,9 +108,9 @@ def main():
                            "Show all applicants", "Search in mentors database"])
         try:
             common.menu_options()
-        except KeyError as error:
+        except (KeyError, KeyboardInterrupt) as error:
+            os.system('clear')
             print(error)
-
 
 if __name__ == '__main__':
     main()

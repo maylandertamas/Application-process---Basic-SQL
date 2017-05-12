@@ -1,5 +1,6 @@
 import common
 from manage_db import cur, main
+import os
 
 
 def get_col_titles(database_name):
@@ -65,6 +66,6 @@ def search_in_mentors_db(column):
     for element in result_to_list:
         if element[7] is None:
             element[7] = "Nothing"
-
+    os.system('clear')
     MENTOR_DB_COL_TITLES = get_col_titles("mentors")
     common.print_table(result_to_list, MENTOR_DB_COL_TITLES)
