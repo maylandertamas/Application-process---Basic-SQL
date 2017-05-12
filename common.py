@@ -12,7 +12,7 @@ def print_table(table, title_list):
     lengths = [max(map(len, map(str, col))) for col in columns]
     separate_rows = border_vertical + border_vertical.join(' {:^%d} ' % l for l in lengths) + border_vertical
     separate_crosses = border_cross + border_cross.join(border_horizontal * (l+2) for l in lengths) + border_cross
-    os.system('clear')
+    
     print(separate_crosses)
     print(separate_rows.format(*title_list))
     print(separate_crosses)
