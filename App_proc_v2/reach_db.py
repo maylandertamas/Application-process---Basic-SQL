@@ -56,7 +56,7 @@ applicants_with_creaton_dates = database_query("SELECT applicants.first_name, ap
 
 
 applicants_and_their_mentors = database_query("SELECT applicants.first_name, applicants.application_code,\
-                                                COALESCE(mentors.first_name, 'None'), COALESCE(mentors.last_name, 'None')\
+                                                CONCAT(COALESCE(mentors.first_name, 'None'), ' ', mentors.last_name)\
                                                 FROM mentors\
                                                 INNER JOIN applicants_mentors ON mentors.id = applicants_mentors.mentor_id\
                                                 RIGHT JOIN applicants ON applicants_mentors.applicant_id = applicants.id\
