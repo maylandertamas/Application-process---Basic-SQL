@@ -61,3 +61,73 @@ body {margin:0;}
 .page-table tr:nth-child(even) {
     background-color: #f2f2f2;
     }
+
+#search-mentor {
+    display: inline-block;
+}
+
+#search-applicant {
+    display: inline-block;
+}
+
+#search-mentor input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #DB4C52;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+
+}
+
+#search-mentor input[type=text]:focus {
+    border: 3px solid #59A6CB;
+}
+
+
+#search-applicant input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #DB4C52;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+
+}
+
+#search-applicant input[type=text]:focus {
+    border: 3px solid #59A6CB;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+#table-div-main {
+    align: center;
+    border: 1px solid black;
+}
