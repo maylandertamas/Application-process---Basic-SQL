@@ -1,16 +1,16 @@
-from flask import Flask, request, render_template, redirect, url_for, abort
+from flask import Flask, request, render_template, url_for, redirect
 import reach_db
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def main_page():
-    return render_template("layout.html")
+def main_page(mentor_data=None, applicant_data=None):
+    return render_template("layout.html", mentor_data=mentor_data, applicant_data=applicant_data)
 
 
 @app.route("/mentors")
-def mentors_and_page():
+def mentors_and_schools_page():
     webpage_data = reach_db.select_mentors_by_school
     return render_template("mentors.html", data=webpage_data)
 
@@ -44,6 +44,19 @@ def applicants_and_mentors_page():
     webpage_data = reach_db.applicants_and_their_mentors
     return render_template("applicants-and-mentors.html", data=webpage_data)
 
+
+@app.route("/search-in-mentors")
+def search_in_mentors_db():
+    given_name = request.form['name_mentors']
+    table_data = reach_db.database_custom_query("mentors", given_name)
+    return redirect(url_for('main_page', mentor_data=table_data))
+
+
+@app.route("/search-in-applicants")
+def search_in_mentors_db():
+    given_name = request.form['name_applicants']
+    table_data = reach_db.database_custom_query("applicants", given_name)
+    return redirect(url_for('main_page', applicant_data=table_data))
 
 if __name__ == '__main__':
     app.run(debug=True)
