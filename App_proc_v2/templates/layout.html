@@ -7,7 +7,7 @@
   {% endblock %}
   <title>{% block title %} Codecool applicant process {% endblock %}</title>
 </head>
-
+<!-- radio button hogy hova akar keresni-->
 <body>
   <div id="menu">
   <ul>
@@ -21,13 +21,23 @@
 </ul>
   <div id="content">{% block content %}
     <h1>Codecool applicant process</h1>
-    <p>Search by name in our database</p>
-    <div id="table-div-main-left">
-      <form method="GET" action="/search-in-mentors">
-        <textarea></textarea>
-        <button type="submit" name="name_mentors" value="name">Submit</button>
+    <h2>Search by name in our database</h2>
+    <div id="table-div-main">
+      <div id="search-mentor">
+         <h3>Search in mentor's database</h3>
+      <form method="POST" action="/search-in-mentors">
+        <input type="text" name="name_mentors"></textarea>
+        <button class="button" type="submit" value="submit">Search</button>
       </form>
-      {% if mentor_data is not None %}
+      </div>
+      <div id="search-applicant">
+        <h3>Search in applicant's database</h3>
+      <form method="POST" action="/search-in-applicants">
+        <input type="text" name="name_applicants"></textarea>
+        <button class="button" type="submit" value="submit">Search</button>
+      </form>
+      </div>
+      {% if mentor_data  %}
       <table class="page-table">
         <th>First name</th>
         <th>Last name</th>
@@ -49,13 +59,7 @@
       {% endfor %}
     </table>
     {% endif %}
-    </div>
-    <div id="table-div-main-right">
-      <form method="GET" action="/search-in-applicants">
-        <textarea></textarea>
-        <button type="submit" name="name_applicants" value="name">Submit</button>
-      </form>
-       {% if applicant_data is not None %}
+    {% if applicant_data %}      
       <table class="page-table">
         <th>First name</th>
         <th>Last name</th>
