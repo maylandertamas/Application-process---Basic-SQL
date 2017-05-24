@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def main_page(mentor_data=None, applicant_data=None):
-    return render_template("layout.html", mentor_data=mentor_data, applicant_data=applicant_data)
+def main_page():
+    return render_template("layout.html")
 
 
 @app.route("/mentors")
@@ -45,18 +45,18 @@ def applicants_and_mentors_page():
     return render_template("applicants-and-mentors.html", data=webpage_data)
 
 
-@app.route("/search-in-mentors")
+@app.route("/search-in-mentors", methods=["POST"])
 def search_in_mentors_db():
     given_name = request.form['name_mentors']
     table_data = reach_db.database_custom_query("mentors", given_name)
-    return redirect(url_for('main_page', mentor_data=table_data))
+    return render_template("layout.html", mentor_data=table_data)
 
 
-@app.route("/search-in-applicants")
-def search_in_mentors_db():
+@app.route("/search-in-applicants", methods=["POST"])
+def search_in_applicants_db():
     given_name = request.form['name_applicants']
     table_data = reach_db.database_custom_query("applicants", given_name)
-    return redirect(url_for('main_page', applicant_data=table_data))
+    return render_template("layout.html", applicant_data=table_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
