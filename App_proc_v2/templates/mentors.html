@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Mentors by schools{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h1>Mentors by schools</h1>
+<div class=alt-page-content>
+  <table>
+    <th>Mentors' name</th>
+    <th>School's name</th>
+    <th>School's country</th>
+    {% for element in data %}
+    <tr>
+      <td>{{ element[0] }}</td>
+      <td>{{ element[1] }}</td>
+      <td>{{ element[2] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
+{% block footer %}
+  <div="footer"></div>
+{% endblock %}
