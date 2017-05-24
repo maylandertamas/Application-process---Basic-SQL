@@ -1,20 +1,18 @@
 {% extends "layout.html" %}
-{% block title %}All codecool schools{% endblock %}
+{% block title %}Mentors by countries{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 {% block content %}
-  <h1>Mentors by schools</h1>
+  <h1>Mentors by countries</h1>
 <div class=alt-page-content>
   <table>
-    <th>Mentors' name</th>
-    <th>School's name</th>
-    <th>School's country</th>
+    <th>Country</th>
+    <th>Number of mentors</th>
     {% for element in data %}
     <tr>
       <td>{{ element[0] }}</td>
       <td>{{ element[1] }}</td>
-      <td>{{ element[2] }}</td>
     </tr>
     {% endfor %}
   </table>

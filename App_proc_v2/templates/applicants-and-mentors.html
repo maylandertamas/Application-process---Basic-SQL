@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
-{% block title %}All codecool schools{% endblock %}
+{% block title %}Applicants and their mentors{% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
 {% block content %}
-  <h1>Mentors by schools</h1>
+  <h1>Applicants and their mentors</h1>
 <div class=alt-page-content>
   <table>
-    <th>Mentors' name</th>
-    <th>School's name</th>
-    <th>School's country</th>
+    <th>Applicant's first</th>
+    <th>Application code</th>
+    <th>Mentor's name</th>
     {% for element in data %}
     <tr>
       <td>{{ element[0] }}</td>
