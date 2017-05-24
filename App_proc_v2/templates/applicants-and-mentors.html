@@ -1,13 +1,25 @@
 {% extends "layout.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}All codecool schools{% endblock %}
 {% block head %}
   {{ super() }}
-  <style type="text/css">
-    .important { color: #336699; }
-  </style>
 {% endblock %}
 {% block content %}
-  <h1>Index</h1>
-  <p class="important">
-    Welcome on my awesome homepage.
+  <h1>Mentors by schools</h1>
+<div class=alt-page-content>
+  <table>
+    <th>Mentors' name</th>
+    <th>School's name</th>
+    <th>School's country</th>
+    {% for element in data %}
+    <tr>
+      <td>{{ element[0] }}</td>
+      <td>{{ element[1] }}</td>
+      <td>{{ element[2] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
+{% block footer %}
+  <div="footer"></div>
 {% endblock %}
