@@ -1,17 +1,83 @@
 <!doctype html>
 <html>
-  <head>
-    {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>{% block title %}  Codecool applicant process {% endblock %}</title>
-    {% endblock %}
-  </head>
-  <body>
-    <div id="content">{% block content %}<h1>Codecool applicant process</h1> <p>This is the main page, yo.</p> {% endblock %}</div>
-    <div id="footer">
-      {% block footer %}
-      &copy; Copyright 2017 by <a href="https://codecool.com/">Codecool</a>.
-      {% endblock %}
+
+<head>
+  {% block head %}
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+  {% endblock %}
+  <title>{% block title %} Codecool applicant process {% endblock %}</title>
+</head>
+
+<body>
+  <div id="menu">
+  <ul>
+  <li><a class="active" href="{{ url_for('main_page') }}">Main</a></li>
+  <li><a href="{{ url_for('mentors_and_schools_page') }}">Mentors and schools</a></li>
+  <li><a href="{{ url_for('all_school_page') }}">All schools</a></li>
+  <li><a href="{{ url_for('mentors_by_country') }}">Mentors per country</a></li>
+  <li><a href="{{ url_for('contacts_page') }}">School contacts</a></li>
+  <li><a href="{{ url_for('applicants_page') }}">Applicants</a></li>
+  <li><a href="{{ url_for('applicants_and_mentors_page') }}">Applicants and mentors</a></li>
+</ul>
+  <div id="content">{% block content %}
+    <h1>Codecool applicant process</h1>
+    <p>Search by name in our database</p>
+    <div id="table-div-main-left">
+      <form method="GET" action="/search-in-mentors">
+        <textarea></textarea>
+        <button type="submit" name="name_mentors" value="name">Submit</button>
+      </form>
+      {% if mentor_data is not None %}
+      <table class="page-table">
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Nick name</th>
+        <th>Phone number</th>
+        <th>E-mail</th>
+        <th>City</th>
+        <th>Favourite number</th>
+        {% for element in mentor_data %}
+      <tr>
+        <td>{{ element[1] }}</td>
+        <td>{{ element[2] }}</td>
+        <td>{{ element[3] }}</td>
+        <td>{{ element[4] }}</td>
+        <td>{{ element[5] }}</td>
+        <td>{{ element[6] }}</td>
+        <td>{{ element[7] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
     </div>
-  </body>
+    <div id="table-div-main-right">
+      <form method="GET" action="/search-in-applicants">
+        <textarea></textarea>
+        <button type="submit" name="name_applicants" value="name">Submit</button>
+      </form>
+       {% if applicant_data is not None %}
+      <table class="page-table">
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Phone number</th>
+        <th>E-mail</th>
+        <th>Application code</th>
+        {% for element in applicant_data %}
+      <tr>
+        <td>{{ element[1] }}</td>
+        <td>{{ element[2] }}</td>
+        <td>{{ element[3] }}</td>
+        <td>{{ element[4] }}</td>
+        <td>{{ element[5] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    </div>
+    {% endblock %}</div>
+  <div id="footer">
+    {% block footer %} &copy; Copyright 2017 by <a href="https://codecool.com/">Codecool</a>. {% endblock %}
+  </div>
+</body>
+
 </html>
