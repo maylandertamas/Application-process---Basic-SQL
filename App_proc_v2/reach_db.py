@@ -22,6 +22,12 @@ def connect_to_db(function):
 def database_query(command):
     return command
 
+@connect_to_db
+def database_custom_query(database_name, keyword):
+    command = "SELECT * FROM {0}\
+               WHERE first_name LIKE '%{1}%' OR last_name LIKE '%{1}%';".format(database_name, keyword)
+    return command
+
 
 select_mentors_by_school = database_query("SELECT CONCAT(mentors.first_name, ' ', mentors.last_name) AS Mentors, schools.name, schools.country\
                                            FROM mentors\
