@@ -23,22 +23,26 @@ def all_school_page():
 
 @app.route("/mentors-by-country")
 def mentors_by_country():
-    pass
+    webpage_data = reach_db.mentors_by_country
+    return render_template("mentors-by-country.html", data=webpage_data)
 
 
 @app.route("/contacts")
 def contacts_page():
-    pass
+    webpage_data = reach_db.contacts_by_school
+    return render_template("contacts.html", data=webpage_data)
 
 
 @app.route("/applicants")
 def applicants_page():
-    pass
+    webpage_data = reach_db.applicants_with_creaton_dates
+    return render_template("applicants.html", data=webpage_data)
 
 
 @app.route("/applicants-and-mentors")
 def applicants_and_mentors_page():
-    pass
+    webpage_data = reach_db.applicants_and_their_mentors
+    return render_template("applicants-and-mentors.html", data=webpage_data)
 
 
 if __name__ == '__main__':
