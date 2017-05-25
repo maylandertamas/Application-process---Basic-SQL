@@ -45,18 +45,19 @@ def applicants_and_mentors_page():
     return render_template("applicants-and-mentors.html", data=webpage_data)
 
 
-@app.route("/search-in-mentors", methods=["POST"])
+@app.route("/search-in-database", methods=["POST"])
 def search_in_mentors_db():
-    given_name = request.form['name_mentors']
-    table_data = reach_db.database_custom_query("mentors", given_name)
-    return render_template("layout.html", mentor_data=table_data)
+    given_name = request.form['name']
+    database_name = request.form['database']
+    mentor_data = None
+    applicant_data = None
+    if database_name == "mentors":
+        mentor_data = reach_db.database_custom_select_query(database_name, given_name)
+    elif database_name == "applicants":
+        applicant_data = reach_db.database_custom_select_query(database_name, given_name)
 
+    return render_template("layout.html", mentor_data=mentor_data, applicant_data=applicant_data)
 
-@app.route("/search-in-applicants", methods=["POST"])
-def search_in_applicants_db():
-    given_name = request.form['name_applicants']
-    table_data = reach_db.database_custom_query("applicants", given_name)
-    return render_template("layout.html", applicant_data=table_data)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -7,7 +7,6 @@
   {% endblock %}
   <title>{% block title %} Codecool applicant process {% endblock %}</title>
 </head>
-<!-- radio button hogy hova akar keresni-->
 <body>
   <div id="menu">
   <ul>
@@ -18,29 +17,25 @@
   <li><a href="{{ url_for('contacts_page') }}">School contacts</a></li>
   <li><a href="{{ url_for('applicants_page') }}">Applicants</a></li>
   <li><a href="{{ url_for('applicants_and_mentors_page') }}">Applicants and mentors</a></li>
+  <a href="https://codecool.com/"><li id="menu-img"><img src="{{url_for('static', filename='logo@2x.png')}}"><li></a>
 </ul>
+  </div>
   <div id="content">{% block content %}
     <h1>Codecool applicant process</h1>
-    <h2>Search by name in our database</h2>
-    <div id="table-div-main">
-      <div id="search-mentor">
-         <h3>Search in mentor's database</h3>
-      <form method="POST" action="/search-in-mentors">
-        <input type="text" name="name_mentors"></textarea>
-        <button class="button" type="submit" value="submit">Search</button>
-      </form>
+    <h3>Search by name in the databases</h2>
+      <div id="search">
+        <form method="POST" action="/search-in-database">
+          <input type="radio" name="database" value="mentors" checked>Mentors<br>
+          <input type="radio" name="database" value="applicants">Applicants<br>
+          <input type="text" name="name"></textarea>
+          <p id="search-description">Hint: By leaving the search field blank, it will list all the database records!</p>
+          <button class="button" type="submit" value="submit">Search</button>
+        </form>
       </div>
-      <div id="search-applicant">
-        <h3>Search in applicant's database</h3>
-      <form method="POST" action="/search-in-applicants">
-        <input type="text" name="name_applicants"></textarea>
-        <button class="button" type="submit" value="submit">Search</button>
-      </form>
-      </div>
+      <div id="table-div-main">
       {% if mentor_data  %}
       <table class="page-table">
-        <th>First name</th>
-        <th>Last name</th>
+        <th>Name</th>
         <th>Nick name</th>
         <th>Phone number</th>
         <th>E-mail</th>
@@ -48,8 +43,7 @@
         <th>Favourite number</th>
         {% for element in mentor_data %}
       <tr>
-        <td>{{ element[1] }}</td>
-        <td>{{ element[2] }}</td>
+        <td>{{ element[1] }} {{ element[2] }}</td>
         <td>{{ element[3] }}</td>
         <td>{{ element[4] }}</td>
         <td>{{ element[5] }}</td>
@@ -61,15 +55,13 @@
     {% endif %}
     {% if applicant_data %}      
       <table class="page-table">
-        <th>First name</th>
-        <th>Last name</th>
+        <th>Name</th>
         <th>Phone number</th>
         <th>E-mail</th>
         <th>Application code</th>
         {% for element in applicant_data %}
       <tr>
-        <td>{{ element[1] }}</td>
-        <td>{{ element[2] }}</td>
+        <td>{{ element[1] }} {{ element[2] }}</td>
         <td>{{ element[3] }}</td>
         <td>{{ element[4] }}</td>
         <td>{{ element[5] }}</td>
@@ -78,10 +70,11 @@
     </table>
     {% endif %}
     </div>
-    {% endblock %}</div>
-  <div id="footer">
-    {% block footer %} &copy; Copyright 2017 by <a href="https://codecool.com/">Codecool</a>. {% endblock %}
-  </div>
+    {% endblock %}
+     <div id="footer">
+      {% block footer %} <p>&copy; Copyright 2017 by <a href="https://codecool.com/">Codecool</a>. </p>{% endblock %}
+      </div>
+    </div>
 </body>
 
 </html>
