@@ -11,7 +11,8 @@ body {margin:0;}
     width: 100%;
     z-index: 1;
     font-family: Courier New, Courier, monospace; 
-    font-size: 90%;
+    font-size: 80%;
+    font-weight: bold;
 }
 
 #menu li {

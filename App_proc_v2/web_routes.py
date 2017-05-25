@@ -51,6 +51,7 @@ def search_in_mentors_db():
     database_name = request.form['database']
     mentor_data = None
     applicant_data = None
+
     if database_name == "mentors":
         mentor_data = reach_db.database_custom_select_query(database_name, given_name)
     elif database_name == "applicants":

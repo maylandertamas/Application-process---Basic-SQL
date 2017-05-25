@@ -25,7 +25,7 @@ def database_query(command):
 @connect_to_db
 def database_custom_select_query(database_name, keyword):
     command = "SELECT * FROM {0}\
-               WHERE first_name LIKE '%{1}%' OR last_name LIKE '%{1}%';".format(database_name, keyword)
+               WHERE lower(first_name) LIKE lower('%{1}%') OR lower(last_name) LIKE lower('%{1}%');".format(database_name, keyword)
     return command
 
 
