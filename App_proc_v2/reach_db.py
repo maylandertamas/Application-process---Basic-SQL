@@ -22,10 +22,12 @@ def connect_to_db(function):
 def database_query(command):
     return command
 
+
 @connect_to_db
-def database_custom_select_query(database_name, keyword):
+def database_custom_select_query(database_name, first_name, last_name):
     command = "SELECT * FROM {0}\
-               WHERE lower(first_name) LIKE lower('%{1}%') OR lower(last_name) LIKE lower('%{1}%');".format(database_name, keyword)
+               WHERE lower(first_name) LIKE lower('%{1}%')\
+               AND lower(last_name) LIKE lower('%{2}%');".format(database_name, first_name, last_name)
     return command
 
 
