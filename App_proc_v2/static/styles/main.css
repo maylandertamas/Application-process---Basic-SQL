@@ -141,3 +141,16 @@ body {margin:0;}
     margin-top: 2em;
     
 }
+
+#search-boxes {
+    width: 70%;
+    display: block;
+}
+
+#first-name-box {
+    width: 50%;
+}
+
+#last-name-box {
+    width: 50%;
+}
