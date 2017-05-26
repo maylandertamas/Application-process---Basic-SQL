@@ -27,7 +27,14 @@
         <form method="POST" action="/search-in-database">
           <input type="radio" name="database" value="mentors" checked>Mentors<br>
           <input type="radio" name="database" value="applicants">Applicants<br>
-          <input type="text" name="name"></textarea>
+          <div id="search-boxes">
+            <div id="first-name-box">
+          <input type="text" name="first-name" placeholder="First name"></textarea>
+            </div>
+            <div id="last-name-box">
+          <input type="text" name="last-name" placeholder="Last name"></textarea>
+            </div>
+          </div>
           <p id="search-description">Hint: By leaving the search field blank will list all the database records!</p>
           <button class="button" type="submit" value="submit">Search</button>
         </form>
