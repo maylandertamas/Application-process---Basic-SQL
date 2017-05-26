@@ -47,15 +47,16 @@ def applicants_and_mentors_page():
 
 @app.route("/search-in-database", methods=["POST"])
 def search_in_mentors_db():
-    given_name = request.form['name']
+    first_name = request.form['first-name']
+    last_name = request.form['last-name']
     database_name = request.form['database']
     mentor_data = None
     applicant_data = None
 
     if database_name == "mentors":
-        mentor_data = reach_db.database_custom_select_query(database_name, given_name)
+        mentor_data = reach_db.database_custom_select_query(database_name, first_name, last_name)
     elif database_name == "applicants":
-        applicant_data = reach_db.database_custom_select_query(database_name, given_name)
+        applicant_data = reach_db.database_custom_select_query(database_name, first_name, last_name)
 
     return render_template("layout.html", mentor_data=mentor_data, applicant_data=applicant_data)
 
