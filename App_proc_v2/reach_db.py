@@ -1,4 +1,5 @@
 import psycopg2
+import sys
 
 
 def connect_to_db(function):
@@ -8,6 +9,7 @@ def connect_to_db(function):
         except psycopg2.Error as e:
             print("You cannot connect!")
             print(e)
+            sys.exit(1)
         else:
             cur = conn.cursor()
             with conn:
